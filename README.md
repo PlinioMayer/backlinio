@@ -1,4 +1,8 @@
-# 🚀 Getting started with Strapi
+# Backlinio
+
+Este é um back-end genérico utilizado genericamente de forma genérica para vários produtos do Plínio, um back-end para um Plínio, ou seja: um backlinio.
+
+## 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
