@@ -5,8 +5,8 @@
   "description": "Um back-end genérico feito para um Plínio",
   "scripts": {
     "build": "strapi build",
-    "deploy": "strapi deploy",
     "develop": "strapi develop",
+    "deploy": "./scripts/deploy.sh",
     "start": "strapi start",
     "strapi": "strapi"
   },
