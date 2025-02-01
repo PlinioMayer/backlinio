@@ -15,6 +15,7 @@ scp -r \
 
 ssh root@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
     npm --prefix /opt/backlinio/ i;
-    chmod 755 -R /opt/backlinio/dist/ /opt/backlinio/node_modules/;
-    screen -S strapi -dm npm run start;
+    chmod 755 -R /opt/backlinio;
+    screen -X -S strapi quit;
+    screen -S strapi -dm npm --prefix /opt/backlinio/ run start;
 EOF
