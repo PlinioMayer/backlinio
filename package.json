@@ -5,7 +5,7 @@
   "description": "Um back-end genérico feito para um Plínio",
   "scripts": {
     "build": "strapi build",
-    "develop": "strapi develop",
+    "develop": "docker compose -f ambiente/docker-compose.yaml up -d; strapi develop",
     "deploy": "./scripts/deploy.sh",
     "start": "strapi start",
     "strapi": "strapi"
