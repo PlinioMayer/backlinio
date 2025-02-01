@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "eamodio.gitlens",
+        "christian-kohler.npm-intellisense",
+        "davidanson.vscode-markdownlint",
+        "ms-azuretools.vscode-docker"
+    ]
+}

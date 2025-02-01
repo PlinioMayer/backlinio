@@ -3,6 +3,7 @@ npm run build;
 
 scp -r \
     dist/ \
+    database/ \
     .env \
     favicon.ico \
     package-lock.json \
@@ -13,7 +14,7 @@ scp -r \
     root@vps56603.publiccloud.com.br:/opt/backlinio/;
 
 ssh root@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
-    chmod 640 -R /opt/backlinio/;
     npm --prefix /opt/backlinio/ i;
-    chmod 750 -R /opt/backlinio/dist/ /opt/backlinio/node_modules/;
+    chmod 755 -R /opt/backlinio/dist/ /opt/backlinio/node_modules/;
+    screen -S strapi -dm npm run start;
 EOF
