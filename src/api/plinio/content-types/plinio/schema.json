@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plinios",
+  "info": {
+    "singularName": "plinio",
+    "pluralName": "plinios",
+    "displayName": "Plínio",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 1
+    },
+    "conteudo": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "obtido": {
+      "type": "boolean"
+    }
+  }
+}
