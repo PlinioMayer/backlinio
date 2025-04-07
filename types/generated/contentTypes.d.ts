@@ -398,6 +398,39 @@ export interface ApiDiarioDiario extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
+  collectionName: 'objetivos';
+  info: {
+    displayName: 'Objetivo';
+    pluralName: 'objetivos';
+    singularName: 'objetivo';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::objetivo.objetivo'
+    > &
+      Schema.Attribute.Private;
+    nome: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPlinioPlinio extends Struct.CollectionTypeSchema {
   collectionName: 'plinios';
   info: {
@@ -945,6 +978,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::diario.diario': ApiDiarioDiario;
+      'api::objetivo.objetivo': ApiObjetivoObjetivo;
       'api::plinio.plinio': ApiPlinioPlinio;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
