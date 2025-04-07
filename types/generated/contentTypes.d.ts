@@ -401,6 +401,7 @@ export interface ApiDiarioDiario extends Struct.CollectionTypeSchema {
 export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
   collectionName: 'objetivos';
   info: {
+    description: '';
     displayName: 'Objetivo';
     pluralName: 'objetivos';
     singularName: 'objetivo';
@@ -412,6 +413,9 @@ export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    excluido: Schema.Attribute.DateTime;
+    fim: Schema.Attribute.Date;
+    inicio: Schema.Attribute.Date & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -448,6 +452,14 @@ export interface ApiPlinioPlinio extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    dias: Schema.Attribute.BigInteger &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: '0';
+        },
+        string
+      >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -460,7 +472,6 @@ export interface ApiPlinioPlinio extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    obtido: Schema.Attribute.Boolean;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

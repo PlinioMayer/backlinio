@@ -1,7 +1,17 @@
-/**
- * objetivo controller
- */
+import { Core, factories, Modules } from '@strapi/strapi'
+import { Context } from 'koa';
+import { daysBetween } from '../../../utils';
 
-import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::objetivo.objetivo');
+type ObjetivoPlinio = Modules.Documents.Document<'api::objetivo.objetivo'> & { plinio: Modules.Documents.Document<'api::plinio.plinio'> };
+
+export default factories.createCoreController('api::objetivo.objetivo', ({ strapi }: { strapi: Core.Strapi }) => ({
+  async find(ctx: Context) {
+    const objetivos: { data: ObjetivoPlinio[] } = await super.find(ctx);
+    for (const objetivo of objetivos.data) {
+      const dias = daysBetween(new Date(objetivo.inicio), new Date(objetivo.fim));
+      objetivo.plinio = await strapi.service('api::plinio.plinio').findMaxPlinio(dias);
+    }
+    return objetivos;
+  }
+}));

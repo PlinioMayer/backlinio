@@ -4,7 +4,8 @@
   "info": {
     "singularName": "objetivo",
     "pluralName": "objetivos",
-    "displayName": "Objetivo"
+    "displayName": "Objetivo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -16,6 +17,16 @@
       "required": true,
       "unique": true,
       "minLength": 1
+    },
+    "inicio": {
+      "type": "date",
+      "required": true
+    },
+    "fim": {
+      "type": "date"
+    },
+    "excluido": {
+      "type": "datetime"
     }
   }
 }
