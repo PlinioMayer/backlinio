@@ -9,6 +9,7 @@ export default factories.createCoreService('api::plinio.plinio', ({ strapi }: { 
       limit: 1,
       sort: 'dias:desc',
       status: 'published',
+      populate: 'conteudo',
       filters: {
         dias: {
           $lte: dias
