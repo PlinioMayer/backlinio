@@ -15,9 +15,12 @@ scp -r \
 ssh root@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
     npm --prefix /opt/backlinio/ i;
     mkdir -p /opt/backlinio/public/uploads;
-    chmod 750 -R /opt/backlinio;
+    chmod 755 -R /opt/backlinio;
     chmod 660 -R /opt/backlinio/public/uploads;
     chmod 770 /opt/backlinio/public/uploads;
+EOF
+
+ssh strapi@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
     screen -X -S strapi quit;
     screen -S strapi -dm npm --prefix /opt/backlinio/ run start;
 EOF
