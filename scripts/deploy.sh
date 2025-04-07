@@ -1,4 +1,9 @@
 #!/usr/bin/bash
+if [[ ! "$(git status)" =~ 'nothing to commit, working tree clean' ]]; then
+    echo "Aquela commitada ajuda";
+    exit 1;
+fi
+
 npm run build;
 
 scp -r \
