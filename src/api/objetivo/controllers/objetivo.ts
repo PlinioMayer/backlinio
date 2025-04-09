@@ -1,5 +1,5 @@
 import { Core, factories, Modules } from '@strapi/strapi'
-import { Context } from 'koa';
+import { Context, Next } from 'koa';
 import { daysBetween } from '../../../utils';
 
 
@@ -20,5 +20,11 @@ export default factories.createCoreController('api::objetivo.objetivo', ({ strap
     }
 
     return objetivos;
+  },
+
+  async delete(ctx: Context, next: Next) {
+    await strapi.service('api::objetivo.objetivo').update(ctx.params.id, { data: { excluido: new Date() } });
+    ctx.status = 204;
+    await next();
   }
 }));
