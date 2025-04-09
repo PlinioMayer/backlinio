@@ -13,6 +13,9 @@ export default factories.createCoreService('api::plinio.plinio', ({ strapi }: { 
       filters: {
         dias: {
           $lte: dias
+        },
+        excluido: {
+          $null: true
         }
       },
     }))[0];

@@ -8,10 +8,14 @@ type ObjetivoPlinio = Modules.Documents.Document<'api::objetivo.objetivo'> & { p
 export default factories.createCoreController('api::objetivo.objetivo', ({ strapi }: { strapi: Core.Strapi }) => ({
   async find(ctx: Context) {
     const objetivos: { data: ObjetivoPlinio[] } = await super.find(ctx);
-    for (const objetivo of objetivos.data) {
-      const dias = daysBetween(new Date(objetivo.inicio), new Date(objetivo.fim));
-      objetivo.plinio = await strapi.service('api::plinio.plinio').findMaxPlinio(dias);
+
+    if (ctx.query.plinio === 'true') {
+      for (const objetivo of objetivos.data) {
+        const dias = daysBetween(new Date(objetivo.inicio), new Date(objetivo.fim));
+        objetivo.plinio = await strapi.service('api::plinio.plinio').findMaxPlinio(dias);
+      }
     }
+
     return objetivos;
   }
 }));
