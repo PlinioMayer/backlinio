@@ -7,6 +7,9 @@ type ObjetivoPlinio = Modules.Documents.Document<'api::objetivo.objetivo'> & { p
 
 export default factories.createCoreController('api::objetivo.objetivo', ({ strapi }: { strapi: Core.Strapi }) => ({
   async find(ctx: Context) {
+    const filters: Record<string, unknown> = ctx.query.filters = ctx.query.filters as Record<string, unknown> ?? {};
+    const excluido: Record<string, unknown> = filters.excluido = filters.excluido as Record<string, unknown> ?? {};
+    excluido.$null = excluido.$null ?? true;
     const objetivos: { data: ObjetivoPlinio[] } = await super.find(ctx);
 
     if (ctx.query.plinio === 'true') {

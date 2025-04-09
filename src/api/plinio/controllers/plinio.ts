@@ -10,7 +10,7 @@ export default factories.createCoreController('api::plinio.plinio', ({ strapi }:
     if (ctx.query.byObjetivo === 'true') {
       const filters: Record<string, unknown> = ctx.query.filters = ctx.query.filters as Record<string, unknown> ?? {};
       const dias: Record<string, unknown> = filters.dias = filters.dias as Record<string, unknown> ?? {};
-      dias.$lte = await strapi.service('api::objetivo.objetivo').findMaxDiasObjetivo();
+      dias.$lte = dias.$lte ?? await strapi.service('api::objetivo.objetivo').findMaxDiasObjetivo();
     }
 
     return await super.find(ctx);
