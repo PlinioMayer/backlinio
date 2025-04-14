@@ -4,8 +4,10 @@
   "private": true,
   "description": "Um back-end genérico feito para um Plínio",
   "scripts": {
+    "lint": "eslint .",
     "build": "strapi build",
-    "develop": "docker compose -f ambiente/docker-compose.yaml up -d; strapi develop",
+    "db": "docker compose -f ambiente/docker-compose.yaml up -d",
+    "develop": "strapi develop",
     "deploy": "./scripts/deploy.sh",
     "start": "strapi start",
     "strapi": "strapi"
@@ -21,11 +23,18 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.24.0",
     "@types/koa": "^2.15.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "^5"
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "jiti": "^2.4.2",
+    "typescript": "^5",
+    "typescript-eslint": "^8.30.0"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
