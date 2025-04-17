@@ -1,6 +1,6 @@
 import { Core, factories, Modules } from "@strapi/strapi";
 import { Context, Next } from "koa";
-import { daysBetween } from "../../../utils";
+import { daysBetween, format } from "../../../utils";
 import { isObject } from "lodash/fp";
 import { errors } from "@strapi/utils";
 
@@ -49,6 +49,9 @@ export default factories.createCoreController(
       const maxPlinioInicial = await strapi
         .service("api::plinio.plinio")
         .findMaxPlinio(maxDiasInicial);
+      if (ctx.request.body.data.fim === "today") {
+        ctx.request.body.data.fim = format(new Date());
+      }
       await super.update(ctx, next);
       const maxDias = await strapi.service(uid).findMaxDiasObjetivo();
       const maxPlinio = await strapi
