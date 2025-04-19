@@ -3,6 +3,7 @@ import { Context, Next } from "koa";
 import { daysBetween, format } from "../../../utils";
 import { isObject } from "lodash/fp";
 import { errors } from "@strapi/utils";
+import { ApiPlinioPlinio } from "../../../../types/generated/contentTypes";
 
 const uid = "api::objetivo.objetivo";
 
@@ -90,11 +91,12 @@ export default factories.createCoreController(
 
       const sanitizedInputData = await this.sanitizeInput(body.data, ctx);
 
-      await strapi.service(uid).create({
+      const objetivo = await strapi.service(uid).create({
         ...sanitizedQuery,
         data: sanitizedInputData,
       });
 
+      ctx.body = { objetivo };
       ctx.status = 201;
 
       const maxDias = await strapi.service(uid).findMaxDiasObjetivo();
@@ -103,7 +105,7 @@ export default factories.createCoreController(
         .findMaxPlinio(maxDias);
 
       if (maxPlinioInicial?.documentId !== maxPlinio.documentId) {
-        ctx.body = maxPlinio;
+        (ctx.body as { plinio?: ApiPlinioPlinio }).plinio = maxPlinio;
       }
 
       await next();
