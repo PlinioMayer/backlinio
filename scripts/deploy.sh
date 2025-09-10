@@ -25,7 +25,7 @@ ssh root@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
     chmod 770 /opt/backlinio/public/uploads;
 EOF
 
-ssh strapi@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
+ssh root@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
     screen -X -S strapi quit;
     screen -S strapi -dm npm --prefix /opt/backlinio/ run start;
 EOF
