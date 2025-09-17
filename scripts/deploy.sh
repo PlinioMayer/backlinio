@@ -21,5 +21,5 @@ scp -r \
 ssh root@vps56603.publiccloud.com.br "/usr/bin/bash -s" << EOF
     yarn --cwd /opt/backlinio/;
     screen -X -S strapi quit;
-    screen -dmS strapi npm --prefix /opt/backlinio/ run start;
+    screen -dmS strapi yarn --cwd /opt/backlinio/ start;
 EOF
